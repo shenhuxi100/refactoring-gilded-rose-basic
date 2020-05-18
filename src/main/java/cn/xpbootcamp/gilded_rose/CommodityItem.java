@@ -52,18 +52,8 @@ public class CommodityItem {
     void updateBackstageQuality() {
         if (quality < 50) {
             quality = quality + 1;
-
-            if (sellIn < 11) {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
-            }
-
-            if (sellIn < 6) {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
-            }
+            if (sellIn < 11 && quality < 50) quality++;
+            if (sellIn < 6 && quality < 50) quality++;
         }
 
         sellIn--;
