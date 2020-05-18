@@ -18,6 +18,10 @@ public class CommodityItem {
     }
 
     void updateCommodityItemQuality() {
+        if (commodityName.equals("Sulfuras, Hand of Ragnaros")) {
+            return;
+        }
+
         if (commodityName.equals("Aged Brie")) {
             updateAgedBrieQuality();
             return;
@@ -27,17 +31,15 @@ public class CommodityItem {
             updateBackstageQuality();
             return;
         } else {
-            if (quality > 0 && !commodityName.equals("Sulfuras, Hand of Ragnaros")) {
+            if (quality > 0) {
                 quality = quality - 1;
             }
         }
 
-        if (!commodityName.equals("Sulfuras, Hand of Ragnaros")) {
-            sellIn = sellIn - 1;
-        }
+        sellIn = sellIn - 1;
 
         if (sellIn < 0) {
-            if (quality > 0 && !commodityName.equals("Sulfuras, Hand of Ragnaros")) {
+            if (quality > 0) {
                 quality = quality - 1;
             }
         }
