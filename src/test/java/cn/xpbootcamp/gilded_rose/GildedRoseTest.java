@@ -13,12 +13,12 @@ class GildedRoseTest {
     @ParameterizedTest
     @MethodSource({"provideAgedBries", "provideBackstagePass", "provideSulfuras", "provideRegularItems"})
     void should_update_item_correctly(TestFixture testFixture) {
-        Item item = createItem(testFixture.name, testFixture.sellIn, testFixture.quality);
+        CommodityItem commodityItem = createItem(testFixture.commodityName, testFixture.sellIn, testFixture.quality);
 
-        new GildedRose(new Item[]{item}).update_quality();
+        new GildedRose(new CommodityItem[]{commodityItem}).update_quality();
 
-        Item expectedItem = createItem(testFixture.name, testFixture.updatedSellIn, testFixture.updatedQuality);
-        assertThat(item.toString()).isEqualTo(expectedItem.toString());
+        CommodityItem expectedCommodityItem = createItem(testFixture.commodityName, testFixture.updatedSellIn, testFixture.updatedQuality);
+        assertThat(commodityItem.toString()).isEqualTo(expectedCommodityItem.toString());
     }
 
     private static Stream<TestFixture> provideAgedBries() {
@@ -66,19 +66,19 @@ class GildedRoseTest {
         );
     }
 
-    private static Item createItem(String name, int sellIn, int quality) {
-        return new Item(name, sellIn, quality);
+    private static CommodityItem createItem(String name, int sellIn, int quality) {
+        return new CommodityItem(name, sellIn, quality);
     }
 
     private static class TestFixture {
-        String name;
+        String commodityName;
         int sellIn;
         int quality;
         int updatedSellIn;
         int updatedQuality;
 
-        private TestFixture(String name, int sellIn, int quality, int updatedSellIn, int updatedQuality) {
-            this.name = name;
+        private TestFixture(String commodityName, int sellIn, int quality, int updatedSellIn, int updatedQuality) {
+            this.commodityName = commodityName;
             this.sellIn = sellIn;
             this.quality = quality;
             this.updatedSellIn = updatedSellIn;
