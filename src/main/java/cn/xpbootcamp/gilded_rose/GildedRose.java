@@ -25,26 +25,26 @@ class GildedRose {
                     }
                 }
             } else {
-                if (commodityItems[i].quality > 0) {
-                    CommodityItemQualityMinusOne(i);
-                }
+                CommodityItemQualityMinusOne(i);
             }
 
             if (!commodityItems[i].commodityName.equals("Sulfuras, Hand of Ragnaros")) {
                 commodityItems[i].sellIn = commodityItems[i].sellIn - 1;
             }
 
-            if (commodityItems[i].sellIn < 0) {
-                if (commodityItems[i].commodityName.equals("Aged Brie")) {
-                    CommodityItemQualityPlusOne(i);
+            handleSellInLessThanZero(i);
+        }
+    }
+
+    private void handleSellInLessThanZero(int i) {
+        if (commodityItems[i].sellIn < 0) {
+            if (commodityItems[i].commodityName.equals("Aged Brie")) {
+                CommodityItemQualityPlusOne(i);
+            } else {
+                if (commodityItems[i].commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                    commodityItems[i].quality = 0;
                 } else {
-                    if (commodityItems[i].commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        commodityItems[i].quality = 0;
-                    } else {
-                        if (commodityItems[i].quality > 0) {
-                            CommodityItemQualityMinusOne(i);
-                        }
-                    }
+                    CommodityItemQualityMinusOne(i);
                 }
             }
         }
@@ -57,7 +57,7 @@ class GildedRose {
     }
 
     private void CommodityItemQualityMinusOne(int i) {
-        if (!commodityItems[i].commodityName.equals("Sulfuras, Hand of Ragnaros")) {
+        if (commodityItems[i].quality > 0 && !commodityItems[i].commodityName.equals("Sulfuras, Hand of Ragnaros")) {
             commodityItems[i].quality = commodityItems[i].quality - 1;
         }
     }
