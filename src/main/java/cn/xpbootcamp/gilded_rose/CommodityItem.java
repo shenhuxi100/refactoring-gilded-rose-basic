@@ -22,22 +22,10 @@ public class CommodityItem {
             updateAgedBrieQuality();
             return;
         }
+
         if (commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            if (quality < 50) {
-                quality = quality + 1;
-
-                if (sellIn < 11) {
-                    if (quality < 50) {
-                        quality = quality + 1;
-                    }
-                }
-
-                if (sellIn < 6) {
-                    if (quality < 50) {
-                        quality = quality + 1;
-                    }
-                }
-            }
+            updateBackstageQuality();
+            return;
         } else {
             if (quality > 0 && !commodityName.equals("Sulfuras, Hand of Ragnaros")) {
                 quality = quality - 1;
@@ -49,28 +37,36 @@ public class CommodityItem {
         }
 
         if (sellIn < 0) {
-            if (commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                quality = 0;
-            } else {
-                if (quality > 0 && !commodityName.equals("Sulfuras, Hand of Ragnaros")) {
-                    quality = quality - 1;
-                }
+            if (quality > 0 && !commodityName.equals("Sulfuras, Hand of Ragnaros")) {
+                quality = quality - 1;
             }
         }
     }
 
     void updateAgedBrieQuality() {
-        if (commodityName.equals("Aged Brie")){
-            if (quality < 50) {
-                quality = quality + 1;
-            }
-            sellIn = sellIn - 1;
+        sellIn--;
+        if (50 > quality) quality = quality + 1;
+        if (0 > sellIn && quality < 50) quality = quality + 1;
+    }
 
-            if (sellIn < 0) {
+    void updateBackstageQuality() {
+        if (quality < 50) {
+            quality = quality + 1;
+
+            if (sellIn < 11) {
+                if (quality < 50) {
+                    quality = quality + 1;
+                }
+            }
+
+            if (sellIn < 6) {
                 if (quality < 50) {
                     quality = quality + 1;
                 }
             }
         }
+
+        sellIn--;
+        if(sellIn < 0) quality = 0;
     }
 }
