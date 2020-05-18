@@ -7,7 +7,7 @@ class GildedRose {
         this.commodityItems = commodityItems;
     }
 
-    public void update_quality() {
+    public void updateQuality() {
         for (int i = 0; i < commodityItems.length; i++) {
             CommodityItem item = commodityItems[i];
             item.updateCommodityItemQuality();

@@ -15,7 +15,7 @@ class GildedRoseTest {
     void should_update_item_correctly(TestFixture testFixture) {
         CommodityItem commodityItem = createItem(testFixture.commodityName, testFixture.sellIn, testFixture.quality);
 
-        new GildedRose(new CommodityItem[]{commodityItem}).update_quality();
+        new GildedRose(new CommodityItem[]{commodityItem}).updateQuality();
 
         CommodityItem expectedCommodityItem = createItem(testFixture.commodityName, testFixture.updatedSellIn, testFixture.updatedQuality);
         assertThat(commodityItem.toString()).isEqualTo(expectedCommodityItem.toString());
