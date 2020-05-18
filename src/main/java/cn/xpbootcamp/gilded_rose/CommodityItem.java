@@ -1,10 +1,23 @@
 package cn.xpbootcamp.gilded_rose;
 
-public class CommodityItem {
+import lombok.Data;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ServiceLoader;
+
+@Data
+public class CommodityItem {
     private String commodityName;
     private int sellIn;
     private int quality;
+
+    private static Map<String, CalculateCommodityQuality> ioc = new HashMap<String, CalculateCommodityQuality>();
+
+    {
+        ServiceLoader<CalculateCommodityQuality> serviceLoader = ServiceLoader.load(CalculateCommodityQuality.class);
+        serviceLoader.forEach(service -> ioc.put(service.getCommodityName(), service));
+    }
 
     public CommodityItem(String commodityName, int sellIn, int quality) {
         this.commodityName = commodityName;
@@ -18,43 +31,9 @@ public class CommodityItem {
     }
 
     void updateCommodityItemQuality() {
-        if (commodityName.equals("Sulfuras, Hand of Ragnaros")) {
-            return;
-        }
-
-        if (commodityName.equals("Aged Brie")) {
-            updateAgedBrieQuality();
-            return;
-        }
-
-        if (commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
-            updateBackstageQuality();
-            return;
-        }
-
-        updateCommonQuality();
-    }
-
-    private void updateCommonQuality() {
-        if (quality > 0) quality--;
-        sellIn--;
-        if (sellIn < 0 && quality > 0) quality = quality - 1;
-    }
-
-    void updateAgedBrieQuality() {
-        sellIn--;
-        if (50 > quality) quality = quality + 1;
-        if (0 > sellIn && quality < 50) quality = quality + 1;
-    }
-
-    void updateBackstageQuality() {
-        if (quality < 50) {
-            quality = quality + 1;
-            if (sellIn < 11 && quality < 50) quality++;
-            if (sellIn < 6 && quality < 50) quality++;
-        }
-
-        sellIn--;
-        if(sellIn < 0) quality = 0;
+        if (ioc.get(this.getCommodityName()) != null)
+            ioc.get(this.getCommodityName()).calculateCommodityQuality(this);
+        else
+            ioc.get("Others").calculateCommodityQuality(this);
     }
 }
