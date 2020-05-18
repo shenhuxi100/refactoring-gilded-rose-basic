@@ -12,9 +12,9 @@ public class CommodityItem {
     private int sellIn;
     private int quality;
 
-    private static Map<String, CalculateCommodityQuality> ioc = new HashMap<String, CalculateCommodityQuality>();
+    private static Map<String, CalculateCommodityQuality> ioc = new HashMap<>();
 
-    {
+    static {
         ServiceLoader<CalculateCommodityQuality> serviceLoader = ServiceLoader.load(CalculateCommodityQuality.class);
         serviceLoader.forEach(service -> ioc.put(service.getCommodityName(), service));
     }

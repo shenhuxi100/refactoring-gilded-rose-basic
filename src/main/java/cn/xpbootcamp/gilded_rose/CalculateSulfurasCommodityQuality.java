@@ -8,6 +8,5 @@ public class CalculateSulfurasCommodityQuality implements CalculateCommodityQual
 
     @Override
     public void calculateCommodityQuality(CommodityItem item) {
-        return;
     }
 }
