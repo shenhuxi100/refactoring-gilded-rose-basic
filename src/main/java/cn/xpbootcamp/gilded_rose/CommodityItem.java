@@ -30,19 +30,15 @@ public class CommodityItem {
         if (commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
             updateBackstageQuality();
             return;
-        } else {
-            if (quality > 0) {
-                quality = quality - 1;
-            }
         }
 
-        sellIn = sellIn - 1;
+        updateCommonQuality();
+    }
 
-        if (sellIn < 0) {
-            if (quality > 0) {
-                quality = quality - 1;
-            }
-        }
+    private void updateCommonQuality() {
+        if (quality > 0) quality--;
+        sellIn--;
+        if (sellIn < 0 && quality > 0) quality = quality - 1;
     }
 
     void updateAgedBrieQuality() {
