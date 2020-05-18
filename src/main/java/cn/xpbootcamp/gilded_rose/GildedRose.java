@@ -16,23 +16,17 @@ class GildedRose {
 
                     if (commodityItems[i].commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         if (commodityItems[i].sellIn < 11) {
-                            if (commodityItems[i].quality < 50) {
-                                commodityItems[i].quality = commodityItems[i].quality + 1;
-                            }
+                            CommodityItemQualityPlusOne(i);
                         }
 
                         if (commodityItems[i].sellIn < 6) {
-                            if (commodityItems[i].quality < 50) {
-                                commodityItems[i].quality = commodityItems[i].quality + 1;
-                            }
+                            CommodityItemQualityPlusOne(i);
                         }
                     }
                 }
             } else {
                 if (commodityItems[i].quality > 0) {
-                    if (!commodityItems[i].commodityName.equals("Sulfuras, Hand of Ragnaros")) {
-                        commodityItems[i].quality = commodityItems[i].quality - 1;
-                    }
+                    CommodityItemQualityMinusOne(i);
                 }
             }
 
@@ -42,21 +36,29 @@ class GildedRose {
 
             if (commodityItems[i].sellIn < 0) {
                 if (commodityItems[i].commodityName.equals("Aged Brie")) {
-                    if (commodityItems[i].quality < 50) {
-                        commodityItems[i].quality = commodityItems[i].quality + 1;
-                    }
+                    CommodityItemQualityPlusOne(i);
                 } else {
                     if (commodityItems[i].commodityName.equals("Backstage passes to a TAFKAL80ETC concert")) {
                         commodityItems[i].quality = 0;
                     } else {
                         if (commodityItems[i].quality > 0) {
-                            if (!commodityItems[i].commodityName.equals("Sulfuras, Hand of Ragnaros")) {
-                                commodityItems[i].quality = commodityItems[i].quality - 1;
-                            }
+                            CommodityItemQualityMinusOne(i);
                         }
                     }
                 }
             }
+        }
+    }
+
+    private void CommodityItemQualityPlusOne(int i) {
+        if (commodityItems[i].quality < 50) {
+            commodityItems[i].quality = commodityItems[i].quality + 1;
+        }
+    }
+
+    private void CommodityItemQualityMinusOne(int i) {
+        if (!commodityItems[i].commodityName.equals("Sulfuras, Hand of Ragnaros")) {
+            commodityItems[i].quality = commodityItems[i].quality - 1;
         }
     }
 }
