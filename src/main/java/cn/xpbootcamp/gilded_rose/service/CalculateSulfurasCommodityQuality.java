@@ -1,4 +1,6 @@
-package cn.xpbootcamp.gilded_rose;
+package cn.xpbootcamp.gilded_rose.service;
+
+import cn.xpbootcamp.gilded_rose.CommodityItem;
 
 public class CalculateSulfurasCommodityQuality implements CalculateCommodityQuality{
     @Override

@@ -1,4 +1,7 @@
-package cn.xpbootcamp.gilded_rose;
+package cn.xpbootcamp.gilded_rose.service;
+
+import cn.xpbootcamp.gilded_rose.CommodityItem;
+import cn.xpbootcamp.gilded_rose.Constants;
 
 public class CalculateBackstageCommodityQuality implements CalculateCommodityQuality{
     @Override

@@ -1,5 +1,6 @@
 package cn.xpbootcamp.gilded_rose;
 
+import cn.xpbootcamp.gilded_rose.service.CalculateCommodityQuality;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
